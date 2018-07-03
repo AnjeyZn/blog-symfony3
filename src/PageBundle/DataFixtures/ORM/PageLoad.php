@@ -11,9 +11,19 @@ use PageBundle\Entity\Page;
 use TermBundle\DataFixtures\ORM\TermLoad;
 use TermBundle\Entity\Term;
 
+/**
+ * Class PageLoad
+ *
+ * @package PageBundle\DataFixtures\ORM
+ */
 class PageLoad extends Fixture implements DependentFixtureInterface
 {
 
+    /**
+     * Создаем сущности Page
+     *
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
         $termRepo = $manager->getRepository(Term::class);
@@ -29,7 +39,11 @@ class PageLoad extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-
+    /**
+     * Зависимость для Page (класс Term)
+     *
+     * @return array
+     */
     function getDependencies()
     {
         return [

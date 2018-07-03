@@ -41,3 +41,7 @@ services:
     page.datafixture.page_load:
         class: 'PageBundle\DataFixtures\ORM\PageLoad'
         tags: ['doctrine.fixture.orm']
+
+    comment.datafixture.comment_load:
+        class: 'CommentBundle\DataFixtures\ORM\CommentLoad'
+        tags: ['doctrine.fixture.orm']

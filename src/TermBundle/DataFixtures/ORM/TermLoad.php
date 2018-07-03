@@ -8,9 +8,19 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use TermBundle\Entity\Term;
 
+/**
+ * Class TermLoad
+ *
+ * @package TermBundle\DataFixtures\ORM
+ */
 class TermLoad extends Fixture
 {
 
+    /**
+     * Создаем сущности Term
+     *
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
         for ($i = 1; $i <= 3; $i++) {

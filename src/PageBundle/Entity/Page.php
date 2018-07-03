@@ -2,6 +2,8 @@
 
 namespace PageBundle\Entity;
 
+use CommentBundle\Entity\Comment;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use TermBundle\Entity\Term;
 
@@ -43,6 +45,10 @@ class Page
      */
     private $created;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="CommentBundle\Entity\Comment", mappedBy="pages", cascade={"persist", "remove"})
+     */
+    private $comments;
 
     /**
      * Get id
@@ -148,5 +154,47 @@ class Page
     public function getCategory()
     {
         return $this->category;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->created = new \DateTime();
+        $this->comments = new ArrayCollection();
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \CommentBundle\Entity\Comment $comment
+     *
+     * @return Page
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \CommentBundle\Entity\Comment $comment
+     */
+    public function removeComment(Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
